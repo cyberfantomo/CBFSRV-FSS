@@ -1,2 +1,24 @@
-# CBFSRV-FSS
-FSS (Fast Server Start): An aggressive, non-interactive script to force-unlock and update fresh Debian/Ubuntu VPS. It kills background apt/dpkg locks, wipes lock-files, and prepares your server for VPN/RDP setup in seconds. No more waiting!
+# 🚀 FSS (Fast Server Start)
+
+**FSS** — это максимально агрессивный скрипт для мгновенной подготовки свежего VPS на **Debian/Ubuntu** к работе. 
+
+### 😤 Проблема
+Вы только что арендовали сервер, зашли по SSH, хотите поставить VPN или Docker, но получаете:  
+`E: Could not get lock /var/lib/dpkg/lock-frontend - open (11: Resource temporarily unavailable)`  
+Это система сама решила обновиться в фоне, заставляя вас ждать 5-10 минут.
+
+### 😎 Решение
+**FSS** не ждет. Он «вышибает дверь», убивает фоновые процессы, сносит блокировки и обновляет систему в неинтерактивном режиме. Идеально для автоматизации и быстрой настройки серверов под VPN, RDP и прочее.
+
+### 🛠 Использование (OneClick)
+Запустите на чистом сервере от имени **root**:
+
+```bash
+wget -O dtn_install.sh https://raw.githubusercontent.com/cyberfantomo/CBFSRV-FSS/refs/heads/main/fss_install.sh && chmod +x dtn_install.sh && ./dtn_install.sh
+```
+---
+
+### ⚠️ Дисклеймер (Для "правильных" админов)
+Да, этот скрипт использует pkill -9 и принудительно удаляет лок-файлы. Это "грязный" метод, предназначенный только для первого запуска на свежих, пустых серверах, где скорость важнее этикета. Не используйте его на продакшн-серверах с работающими БД.
+
+---
