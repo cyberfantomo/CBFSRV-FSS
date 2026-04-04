@@ -19,6 +19,7 @@ wget -O dtn_install.sh https://raw.githubusercontent.com/cyberfantomo/CBFSRV-FSS
 ```
 ---
 
-### ⚠️ Disclaimer (For "Proper" Admins)Yes, this script uses pkill -9 and forcibly removes lock files. This is a "dirty" method designed only for the first run on fresh, empty servers where speed is more important than etiquette. Do not use it on production servers with running databases.
+### ⚠️ Disclaimer (For "Proper" Admins)
+Yes, this script uses pkill -9 and forcibly removes lock files. This is a "dirty" method designed only for the first run on fresh, empty servers where speed is more important than etiquette. Do not use it on production servers with running databases.
 
 ---
