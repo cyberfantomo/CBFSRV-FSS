@@ -15,7 +15,7 @@ This happens because the system decided to update itself in the background, maki
 Run on a clean server as **root**:
 
 ```bash
-wget -O fss_install.sh https://raw.githubusercontent.com/cyberfantomo/CBFSRV-FSS/refs/heads/main/fss_install.sh && chmod +x fss_install.sh && ./fss_install.sh
+bash <(curl -Ls https://raw.githubusercontent.com/cyberfantomo/CBFSRV-FSS/main/fss_install.sh)
 ```
 ---
 
