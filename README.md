@@ -15,7 +15,7 @@
 Запустите на чистом сервере от имени **root**:
 
 ```bash
-wget -O dtn_install.sh https://raw.githubusercontent.com/cyberfantomo/CBFSRV-FSS/refs/heads/main/fss_install.sh && chmod +x dtn_install.sh && ./dtn_install.sh
+wget -O fss_install.sh https://raw.githubusercontent.com/cyberfantomo/CBFSRV-FSS/refs/heads/main/fss_install.sh && chmod +x fss_install.sh && ./fss_install.sh
 ```
 ---
 
