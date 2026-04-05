@@ -6,7 +6,7 @@
 ### 😤 The Problem
 You just rented a server, logged in via SSH, and want to install a VPN or Docker, but you get:  
 `E: Could not get lock /var/lib/dpkg/lock-frontend - open (11: Resource temporarily unavailable)`  
-This happens because the system decided to update itself in the background, making you wait 5-10 minutes.
+This happens because the system decided to update itself in the background, making you wait 10+ minutes.
 
 ### 😎 The Solution
 **FSS** doesn't wait. It "kicks the door down," kills background processes, wipes locks, and updates the system in non-interactive mode. Perfect for automation and fast setup of VPN, RDP, and other services.
