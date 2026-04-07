@@ -15,7 +15,9 @@
 Запустите на чистом сервере от имени **root**:
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/cyberfantomo/CBFSRV-FSS/main/fss_install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/cyberfantomo/CBFSRV-FSS/m
+ain/fss_install2.sh 2>/dev/null || wget -qO- https://raw.githubusercontent.com/cyberfantomo/CBFSRV-FSS/main
+/fss_install2.sh)
 ```
 ---
 
