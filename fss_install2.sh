@@ -32,6 +32,9 @@ apt-get update
 echo "[*] Upgrading..."
 DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
+echo "[*] Installing sudo (if missing)..."
+apt-get install -y sudo 2>/dev/null
+
 echo "[*] Fixing dependencies..."
 apt-get -f install -y
 
