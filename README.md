@@ -18,6 +18,7 @@ E: Could not get lock /var/lib/dpkg/lock-frontend - open (11: Resource temporari
 Протестировано и стабильно работает на:
 - Debian 12
 - Ubuntu 24
+
 На других версиях, скорее всего, тоже будет работать, но это не проверялось.
 
 ### 🛠 Использование (OneClick)
