@@ -12,7 +12,7 @@ At this moment, the system is running background updates, locking dpkg/apt, brea
 
 ### 😎 Solution
 **FSS** doesn’t wait. It “kicks the door in”: stops background update services, waits for locks to be released, and if necessary kills stuck processes. Then it restores the dpkg state, fixes dependencies, and updates the system in non-interactive mode.
-- Also installs essential utilities often missing on fresh servers (sudo, curl, wget)
+- Installs essential utilities (sudo, curl, wget) often missing on fresh servers
 - Intended as a first step on a fresh server — instead of running ```apt update && apt upgrade```
 - Perfect for automation and quick setup of servers for VPN, RDP, and more
 
