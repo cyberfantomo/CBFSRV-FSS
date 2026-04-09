@@ -1,4 +1,15 @@
 #!/bin/bash
+# FSS: Fast Server Start (Debian/Ubuntu)
+# https://github.com
+
+set -e
+
+# Colors / Цвета
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' 
+
+echo -e "${GREEN}🚀 FSS: Starting aggressive update... / Запуск агрессивного обновления......${NC}"
 
 echo "[*] Stopping auto updates..."
 systemctl stop apt-daily.service apt-daily-upgrade.service unattended-upgrades.service 2>/dev/null
@@ -46,4 +57,4 @@ echo "[*] Cleaning..."
 apt-get autoremove -y
 apt-get clean
 
-echo "[✓] Done"
+echo -e "${GREEN}✅ Done! System is ready. / Готово! Система готова к работе.${NC}"
