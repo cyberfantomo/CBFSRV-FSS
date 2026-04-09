@@ -12,8 +12,8 @@ NC='\033[0m'
 echo -e "${GREEN}🚀 FSS: Запуск агрессивного обновления... / Starting aggressive update...${NC}"
 
 echo "[*] Stopping auto updates..."
-systemctl stop apt-daily.service apt-daily-upgrade.service unattended-upgrades.service 2>/dev/null
-systemctl stop apt-daily.timer apt-daily-upgrade.timer 2>/dev/null
+systemctl stop apt-daily.service apt-daily-upgrade.service unattended-upgrades.service 2>/dev/null || true
+systemctl stop apt-daily.timer apt-daily-upgrade.timer 2>/dev/null || true
 
 echo "[*] Waiting 10s for apt lock..."
 for i in {1..10}; do
@@ -25,9 +25,9 @@ done
 
 if fuser /var/lib/dpkg/lock >/dev/null 2>&1; then
     echo "[!] Apt still locked — killing..."
-    killall apt apt-get 2>/dev/null
-    pkill -f unattended 2>/dev/null
-    pkill -f apt 2>/dev/null
+    killall apt apt-get 2>/dev/null || true
+    pkill -f unattended 2>/dev/null || true
+    pkill -f apt 2>/dev/null || true
 fi
 
 echo "[*] Waiting for dpkg after kill..."
@@ -40,8 +40,8 @@ done
 
 echo "[*] Ensuring no apt/dpkg processes remain..."
 for i in {1..3}; do
-    pkill -f apt 2>/dev/null
-    pkill -f unattended 2>/dev/null
+    pkill -f apt 2>/dev/null || true
+    pkill -f unattended 2>/dev/null || true
     sleep 1
 done
 
