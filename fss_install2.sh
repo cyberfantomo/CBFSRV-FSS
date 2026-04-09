@@ -9,7 +9,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' 
 
-echo -e "${GREEN}🚀 FSS: Запуск агрессивного обновления... / Starting aggressive update...${NC}"
+echo -e "${GREEN}FSS: Запуск агрессивного обновления... / Starting aggressive update...${NC}"
 
 echo "[*] Waiting for cloud-init (if any)..."
 cloud-init status --wait 2>/dev/null || true
@@ -90,7 +90,5 @@ apt-get -f install -y || true
 echo "[*] Cleaning..."
 apt-get autoremove -y || true
 apt-get clean || true
-
-echo "[✓] Done"
 
 echo -e "${GREEN}✅ Done! System is ready. / Готово! Система готова к работе.${NC}"
