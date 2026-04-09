@@ -32,8 +32,12 @@ apt-get update
 echo "[*] Upgrading..."
 DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
+echo "[*] Installing curl/wget if missing..."
+command -v curl >/dev/null 2>&1 || apt-get install -y curl
+command -v wget >/dev/null 2>&1 || apt-get install -y wget
+
 echo "[*] Installing sudo (if missing)..."
-apt-get install -y sudo 2>/dev/null
+command -v sudo >/dev/null 2>&1 || apt-get install -y sudo
 
 echo "[*] Fixing dependencies..."
 apt-get -f install -y
