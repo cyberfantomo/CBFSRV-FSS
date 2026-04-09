@@ -4,6 +4,7 @@
 
 set -e
 
+# Colors / Цвета
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' 
@@ -19,33 +20,38 @@ systemctl stop apt-daily.timer apt-daily-upgrade.timer 2>/dev/null || true
 
 echo "[*] Waiting 10s for apt lock..."
 for i in {1..10}; do
-    if ! fuser /var/lib/dpkg/lock >/dev/null 2>&1; then
+    if ! fuser /var/lib/dpkg/lock >/dev/null 2>&1 && \
+       ! fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1; then
         break
     fi
     sleep 1
 done
 
-if fuser /var/lib/dpkg/lock >/dev/null 2>&1; then
+if fuser /var/lib/dpkg/lock >/dev/null 2>&1 || \
+   fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1; then
     echo "[!] Apt still locked — killing..."
-    killall apt apt-get 2>/dev/null || true
-    pkill -f unattended 2>/dev/null || true
-    pkill -f apt 2>/dev/null || true
+    killall apt apt-get dpkg 2>/dev/null || true
 fi
 
 echo "[*] Waiting for dpkg after kill..."
-for i in {1..15}; do
-    if ! fuser /var/lib/dpkg/lock >/dev/null 2>&1; then
+for i in {1..10}; do
+    if ! fuser /var/lib/dpkg/lock >/dev/null 2>&1 && \
+       ! fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1; then
         break
     fi
     sleep 1
 done
 
-echo "[*] Ensuring no apt processes remain..."
+echo "[*] Ensuring no apt/dpkg processes remain..."
+
+# 🔥 ВАЖНО: локально отключаем set -e
+set +e
 for i in {1..3}; do
-    pkill -f apt 2>/dev/null || true
-    pkill -f unattended 2>/dev/null || true
+    pkill -f apt 2>/dev/null
+    pkill -f unattended 2>/dev/null
     sleep 1
 done
+set -e
 
 echo "[*] Fixing dpkg..."
 dpkg --configure -a || true
