@@ -9,7 +9,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' 
 
-echo -e "${GREEN}🚀 FSS: Starting aggressive update... / Запуск агрессивного обновления......${NC}"
+echo -e "${GREEN}🚀 FSS: Запуск агрессивного обновления... / Starting aggressive update...${NC}"
 
 echo "[*] Stopping auto updates..."
 systemctl stop apt-daily.service apt-daily-upgrade.service unattended-upgrades.service 2>/dev/null
