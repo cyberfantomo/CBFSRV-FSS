@@ -9,27 +9,52 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' 
 
-echo -e "${GREEN}🚀 FSS: Starting aggressive unlock... / Начинаю жесткую разблокировку...${NC}"
+echo -e "${GREEN}🚀 FSS: Запуск агрессивного обновления... / Starting aggressive update...${NC}"
 
-# 1. Stop background services / Остановка фоновых служб
-echo -e "${YELLOW}--- Stopping background updates / Останавливаю фоновые обновления...${NC}"
-export DEBIAN_FRONTEND=noninteractive
-systemctl stop apt-daily.service apt-daily-upgrade.service unattended-upgrades apt-daily.timer apt-daily-upgrade.timer 2>/dev/null || true
+echo "[*] Stopping auto updates..."
+systemctl stop apt-daily.service apt-daily-upgrade.service unattended-upgrades.service 2>/dev/null
+systemctl stop apt-daily.timer apt-daily-upgrade.timer 2>/dev/null
 
-# 2. Kill stuck processes / Убийство зависших процессов
-echo -e "${YELLOW}--- Killing apt/dpkg processes / Убиваю процессы apt/dpkg...${NC}"
-pkill -9 apt 2>/dev/null || true
-pkill -9 apt-get 2>/dev/null || true
+echo "[*] Waiting 10s for apt lock..."
 
-# 3. Remove locks / Снос блокировок
-echo -e "${YELLOW}--- Removing lock files / Удаляю файлы блокировки...${NC}"
-rm -f /var/lib/dpkg/lock-frontend /var/lib/dpkg/lock /var/lib/apt/lists/lock /var/cache/apt/archives/lock
+for i in {1..10}; do
+    if ! fuser /var/lib/dpkg/lock >/dev/null 2>&1; then
+        break
+    fi
+    sleep 1
+done
 
-# 4. Repair and Update / Починка и обновление
-echo -e "${YELLOW}--- Repairing and updating / Исправляю и обновляю пакеты...${NC}"
+if fuser /var/lib/dpkg/lock >/dev/null 2>&1; then
+    echo "[!] Apt still locked — killing..."
+    killall apt apt-get 2>/dev/null
+fi
+
+echo "[*] Fixing dpkg..."
 dpkg --configure -a
-apt-get update -y
-apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+
+echo "[*] Removing broken backports (if any)..."
+grep -rl "bullseye-backports" /etc/apt/ 2>/dev/null | while read f; do
+    sed -i '/bullseye-backports/s/^/#/' "$f"
+done
+
+echo "[*] Updating..."
+apt-get update
+
+echo "[*] Upgrading..."
+DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
+
+echo "[*] Installing curl/wget if missing..."
+command -v curl >/dev/null 2>&1 || apt-get install -y curl
+command -v wget >/dev/null 2>&1 || apt-get install -y wget
+
+echo "[*] Installing sudo (if missing)..."
+command -v sudo >/dev/null 2>&1 || apt-get install -y sudo
+
+echo "[*] Fixing dependencies..."
+apt-get -f install -y
+
+echo "[*] Cleaning..."
 apt-get autoremove -y
+apt-get clean
 
 echo -e "${GREEN}✅ Done! System is ready. / Готово! Система готова к работе.${NC}"
