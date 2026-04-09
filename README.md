@@ -4,7 +4,7 @@
 ### 🚀 FSS (Fast Server Start) — это максимально агрессивный скрипт для быстрой подготовки свежего VPS на **Debian/Ubuntu** к работе. 
 
 ### 😤 Проблема
-Вы только что арендовали сервер, зашли по SSH, хотите установить VPN или Docker, но получаете что-то вроде такого:
+Вы только что арендовали сервер, зашли по SSH, хотите установить VPN или Docker и тд., но получаете что-то вроде такого:
 ```
 E: Could not get lock /var/lib/dpkg/lock-frontend - open (11: Resource temporarily unavailable).
 ```
