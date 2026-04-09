@@ -1,6 +1,6 @@
 #!/bin/bash
 # FSS: Fast Server Start (Debian/Ubuntu)
-# https://github.com
+# https://github.com/cyberfantomo/CBFSRV-FSS
 
 set -e
 
