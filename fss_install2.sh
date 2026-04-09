@@ -4,12 +4,14 @@
 
 set -e
 
-# Colors / Цвета
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' 
 
 echo -e "${GREEN}🚀 FSS: Запуск агрессивного обновления... / Starting aggressive update...${NC}"
+
+echo "[*] Waiting for cloud-init (if any)..."
+cloud-init status --wait 2>/dev/null || true
 
 echo "[*] Stopping auto updates..."
 systemctl stop apt-daily.service apt-daily-upgrade.service unattended-upgrades.service 2>/dev/null || true
@@ -38,7 +40,7 @@ for i in {1..15}; do
     sleep 1
 done
 
-echo "[*] Ensuring no apt/dpkg processes remain..."
+echo "[*] Ensuring no apt processes remain..."
 for i in {1..3}; do
     pkill -f apt 2>/dev/null || true
     pkill -f unattended 2>/dev/null || true
