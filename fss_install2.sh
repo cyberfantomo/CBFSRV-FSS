@@ -11,8 +11,9 @@ NC='\033[0m'
 
 echo -e "${GREEN}FSS: Запуск агрессивного обновления... / Starting aggressive update...${NC}"
 
-echo "[*] Waiting for cloud-init (if any)..."
-cloud-init status --wait 2>/dev/null || true
+echo "[*] Killing cloud-init (fast mode)..."
+systemctl stop cloud-init cloud-init-local cloud-config cloud-final 2>/dev/null || true
+pkill -f cloud-init 2>/dev/null || true
 
 echo "[*] Stopping auto updates..."
 systemctl stop apt-daily.service apt-daily-upgrade.service unattended-upgrades.service 2>/dev/null || true
@@ -44,7 +45,6 @@ done
 
 echo "[*] Ensuring no apt/dpkg processes remain..."
 
-# 🔥 ВАЖНО: локально отключаем set -e
 set +e
 for i in {1..3}; do
     pkill -f apt 2>/dev/null
