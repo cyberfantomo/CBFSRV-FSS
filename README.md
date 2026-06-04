@@ -1,7 +1,7 @@
 ## 04.04.2026 | [Русский](/README.md) | [English](/README.en_EN.md)
 ## Version: v1.0.0
 
-### 🚀 FSS (Fast Server Start) — это максимально агрессивный скрипт для быстрой подготовки свежего VPS на **Debian/Ubuntu** к работе. 
+### 🚀 FAS (Fast Aggressive Setup) — это максимально агрессивный скрипт для быстрой подготовки свежего VPS на **Debian/Ubuntu** к работе. 
 
 ### 😤 Проблема
 Вы только что арендовали сервер, зашли по SSH, хотите установить VPN или Docker и тд., но получаете что-то вроде такого:
@@ -11,7 +11,7 @@ E: Could not get lock /var/lib/dpkg/lock-frontend - open (11: Resource temporari
 Система в это время обновляется в фоне, блокирует dpkg/apt, ломает зависимости или оставляет пакеты в некорректном состоянии. Иногда это может тянуться 10+ минут или вообще не завершаться.
 
 ### 😎 Решение
-**FSS** не ждет. Он «вышибает дверь»: останавливает фоновые обновления, дожидается освобождения блокировок и при необходимости завершает зависшие процессы, после чего восстанавливает состояние dpkg, чинит зависимости и обновляет систему в неинтерактивном режиме.
+**FAS** не ждет. Он «вышибает дверь»: останавливает фоновые обновления, дожидается освобождения блокировок и при необходимости завершает зависшие процессы, после чего восстанавливает состояние dpkg, чинит зависимости и обновляет систему в неинтерактивном режиме.
 - Устанавливает базовые утилиты (sudo, curl, wget), часто отсутствующие на свежих серверах
 - Используется как первый шаг на свежем сервере — вместо ручного apt ```update && apt upgrade```
 - Идеально для автоматизации и быстрой настройки серверов под VPN, RDP и прочее
@@ -27,7 +27,7 @@ E: Could not get lock /var/lib/dpkg/lock-frontend - open (11: Resource temporari
 Запустите на чистом сервере от имени **root**:
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/cyberfantomo/CBFSRV-FSS/main/fss_install2.sh 2>/dev/null || wget -qO- https://raw.githubusercontent.com/cyberfantomo/CBFSRV-FSS/main/fss_install2.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/cyberfantomo/CBFSRV-FAS/main/fas_install.sh 2>/dev/null || wget -qO- https://raw.githubusercontent.com/cyberfantomo/CBFSRV-FAS/main/fas_install.sh)
 ```
 ---
 
