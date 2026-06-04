@@ -1,6 +1,6 @@
 #!/bin/bash
-# FSS: Fast Server Start (Debian/Ubuntu)
-# https://github.com/cyberfantomo/CBFSRV-FSS
+# FAS: Fast Aggressive Setup (Debian/Ubuntu)
+# https://github.com/cyberfantomo/CBFSRV-FAS
 
 set -e
 
@@ -9,7 +9,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' 
 
-echo -e "${GREEN}FSS: Запуск агрессивного обновления... / Starting aggressive update...${NC}"
+echo -e "${GREEN}FAS: Запуск агрессивного обновления... / Starting aggressive update...${NC}"
 
 echo "[*] Killing cloud-init (fast mode)..."
 systemctl stop cloud-init cloud-init-local cloud-config cloud-final 2>/dev/null || true
