@@ -19,7 +19,7 @@ At this moment, the system is running background updates, locking dpkg/apt, brea
 ### ✅ Compatibility
 Tested and works reliably on:
 - Debian 12
-- Ubuntu 24
+- Ubuntu 22-24
 
 It will likely work on other versions as well, but this has not been tested.
 
