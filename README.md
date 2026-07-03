@@ -18,8 +18,8 @@ E: Could not get lock /var/lib/dpkg/lock-frontend - open (11: Resource temporari
 
 ### ✅ Совместимость
 Протестировано и стабильно работает на:
-- Debian 12
-- Ubuntu 22-24
+- Debian 11/12
+- Ubuntu 20/22/24
 
 На других версиях, скорее всего, тоже будет работать, но это не проверялось.
 
